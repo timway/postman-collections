@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "4e64d840-e2ac-4cec-906b-24e5aaabfbfb",
+		"name": "Cisco FMC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FMC Generate Authentication Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a12cad37-1fb1-4e62-8f6d-f3f8088ac5f5",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Setting DOMAIN_UUID\", function() {",
+							"    if (pm.response.to.have.header(\"DOMAIN_UUID\"))",
+							"    {",
+							"        postman.setEnvironmentVariable(\"domain_uuid\", ",
+							"            postman.getResponseHeader(\"DOMAIN_UUID\")",
+							"        );",
+							"    }",
+							"});",
+							"",
+							"pm.test(\"Setting Access Token Environment Variable\", function() {",
+							"    if (pm.response.to.have.header(\"X-auth-access-token\"))",
+							"    {",
+							"        postman.setEnvironmentVariable(\"access-token\", ",
+							"            postman.getResponseHeader(\"X-auth-access-token\")",
+							"        );",
+							"    }",
+							"});",
+							"",
+							"pm.test(\"Setting Refresh Token Environment Variable\", function() {",
+							"    if (pm.response.to.have.header(\"X-auth-access-token\"))",
+							"    {",
+							"        postman.setEnvironmentVariable(\"refresh-token\", ",
+							"            postman.getResponseHeader(\"X-auth-refresh-token\")",
+							"        );",
+							"    }",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://{{fmc}}/api/fmc_platform/v1/auth/generatetoken",
+					"protocol": "https",
+					"host": [
+						"{{fmc}}"
+					],
+					"path": [
+						"api",
+						"fmc_platform",
+						"v1",
+						"auth",
+						"generatetoken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FMC Refresh Authentication Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a65d2138-59b8-49bc-9937-d88ab3c0622a",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Setting Access Token Environment Variable\", function() {",
+							"    if (pm.response.to.have.header(\"X-auth-access-token\"))",
+							"    {",
+							"        postman.setEnvironmentVariable(\"access-token\", ",
+							"            postman.getResponseHeader(\"X-auth-access-token\")",
+							"        );",
+							"    }",
+							"});",
+							"",
+							"pm.test(\"Setting Refresh Token Environment Variable\", function() {",
+							"    if (pm.response.to.have.header(\"X-auth-access-token\"))",
+							"    {",
+							"        postman.setEnvironmentVariable(\"refresh-token\", ",
+							"            postman.getResponseHeader(\"X-auth-refresh-token\")",
+							"        );",
+							"    }",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-auth-access-token",
+						"value": "{{access-token}}"
+					},
+					{
+						"key": "X-auth-refresh-token",
+						"value": "{{refresh-token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://{{fmc}}/api/fmc_platform/v1/auth/refreshtoken",
+					"protocol": "https",
+					"host": [
+						"{{fmc}}"
+					],
+					"path": [
+						"api",
+						"fmc_platform",
+						"v1",
+						"auth",
+						"refreshtoken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FMC - Deployment - Deployable Devices",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-auth-access-token",
+						"value": "{{access-token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/deployment/deployabledevices",
+					"protocol": "https",
+					"host": [
+						"{{fmc}}"
+					],
+					"path": [
+						"api",
+						"fmc_config",
+						"v1",
+						"domain",
+						"{{domain_uuid}}",
+						"deployment",
+						"deployabledevices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FMC - Deployment - Deployment Requests",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-auth-access-token",
+						"value": "{{access-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"type\": \"DeploymentRequest\",\r\n  \"version\": \"1457566762351\",\r\n  \"forceDeploy\": true,\r\n  \"ignoreWarning\": true,\r\n  \"deviceList\": [\r\n    \"d94f7ada-d141-11e5-acf3-c41f7e67fb1b\"\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/deployment/deploymentrequests",
+					"protocol": "https",
+					"host": [
+						"{{fmc}}"
+					],
+					"path": [
+						"api",
+						"fmc_config",
+						"v1",
+						"domain",
+						"{{domain_uuid}}",
+						"deployment",
+						"deploymentrequests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FMC - Devices - Device Records",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-auth-access-token",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"NetworkGroup\",\n    \"literals\": [\n        {\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.200\"\n        },\n\t\t{\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.201\"\n        },\n        {\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.202\"\n        }\n    ],\n    \"name\": \"UCSD_Internet_Access\",\n    \"id\": \"000C29D6-B20B-0ed3-0000-008589934595\"\n}"
+				},
+				"url": {
+					"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/deployment/deployabledevices",
+					"protocol": "https",
+					"host": [
+						"{{fmc}}"
+					],
+					"path": [
+						"api",
+						"fmc_config",
+						"v1",
+						"domain",
+						"{{domain_uuid}}",
+						"deployment",
+						"deployabledevices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FMC - Object - Network Group",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-auth-access-token",
+						"value": "{{access-token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/object/networkgroups",
+					"protocol": "https",
+					"host": [
+						"{{fmc}}"
+					],
+					"path": [
+						"api",
+						"fmc_config",
+						"v1",
+						"domain",
+						"{{domain_uuid}}",
+						"object",
+						"networkgroups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FMC - Object - Network Group",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "45ead9b9-4f0e-4db1-97c2-c246b451b1cb",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-auth-access-token",
+						"value": "{{access-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"networkGroup1UUID\",\r\n  \"name\": \"networkgroup_obj1_updated\",\r\n  \"type\": \"NetworkGroup\",\r\n  \"objects\": [\r\n    {\r\n      \"type\": \"Network\",\r\n      \"id\": \"NetworkObjectUUID\"\r\n    },\r\n    {\r\n      \"type\": \"Host\",\r\n      \"id\": \"HostObjectUUID\"\r\n    },\r\n    {\r\n      \"type\": \"Range\",\r\n      \"id\": \"RangeObjectUUID\"\r\n    }\r\n  ],\r\n  \"literals\": [\r\n    {\r\n      \"type\": \"Network\",\r\n      \"value\": \"1.2.3.0/24\"\r\n    },\r\n    {\r\n      \"type\": \"Host\",\r\n      \"value\": \"1.2.3.4\"\r\n    }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/object/networkgroups/",
+					"protocol": "https",
+					"host": [
+						"{{fmc}}"
+					],
+					"path": [
+						"api",
+						"fmc_config",
+						"v1",
+						"domain",
+						"{{domain_uuid}}",
+						"object",
+						"networkgroups",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FMC - System Information - Services",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-auth-access-token",
+						"value": "{{access-token}}"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://{{fmc}}/api/fmc_platform/v1/info/serverversion",
+					"protocol": "https",
+					"host": [
+						"{{fmc}}"
+					],
+					"path": [
+						"api",
+						"fmc_platform",
+						"v1",
+						"info",
+						"serverversion"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
