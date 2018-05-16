@@ -6,6 +6,464 @@
 	},
 	"item": [
 		{
+			"name": "Audit",
+			"description": "",
+			"item": [
+				{
+					"name": "FMC - Audit - Audit Records",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-auth-access-token",
+								"value": "{{access-token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{fmc}}/api/fmc_platform/v1/domain/{{domain_uuid}}/audit/auditrecords",
+							"protocol": "https",
+							"host": [
+								"{{fmc}}"
+							],
+							"path": [
+								"api",
+								"fmc_platform",
+								"v1",
+								"domain",
+								"{{domain_uuid}}",
+								"audit",
+								"auditrecords"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Deployment",
+			"description": "",
+			"item": [
+				{
+					"name": "FMC - Deployment - Deployable Devices",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-auth-access-token",
+								"value": "{{access-token}}"
+							}
+						],
+						"body": {},
+						"url": {
+							"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/deployment/deployabledevices",
+							"protocol": "https",
+							"host": [
+								"{{fmc}}"
+							],
+							"path": [
+								"api",
+								"fmc_config",
+								"v1",
+								"domain",
+								"{{domain_uuid}}",
+								"deployment",
+								"deployabledevices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FMC - Deployment - Deployment Requests",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-auth-access-token",
+								"value": "{{access-token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"DeploymentRequest\",\r\n  \"version\": \"1457566762351\",\r\n  \"forceDeploy\": true,\r\n  \"ignoreWarning\": true,\r\n  \"deviceList\": [\r\n    \"d94f7ada-d141-11e5-acf3-c41f7e67fb1b\"\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/deployment/deploymentrequests",
+							"protocol": "https",
+							"host": [
+								"{{fmc}}"
+							],
+							"path": [
+								"api",
+								"fmc_config",
+								"v1",
+								"domain",
+								"{{domain_uuid}}",
+								"deployment",
+								"deploymentrequests"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Device Groups",
+			"description": "",
+			"item": [
+				{
+					"name": "FMC - Device Groups - Device Group Records",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-auth-access-token",
+								"value": "{{access-token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"NetworkGroup\",\n    \"literals\": [\n        {\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.200\"\n        },\n\t\t{\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.201\"\n        },\n        {\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.202\"\n        }\n    ],\n    \"name\": \"UCSD_Internet_Access\",\n    \"id\": \"000C29D6-B20B-0ed3-0000-008589934595\"\n}"
+						},
+						"url": {
+							"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/devicegroups/devicegrouprecords",
+							"protocol": "https",
+							"host": [
+								"{{fmc}}"
+							],
+							"path": [
+								"api",
+								"fmc_config",
+								"v1",
+								"domain",
+								"{{domain_uuid}}",
+								"devicegroups",
+								"devicegrouprecords"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FMC - Device Groups - Device Group Records",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-auth-access-token",
+								"value": "{{access-token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"zoom\",\r\n  \"type\": \"DeviceGroup\",\r\n  \"members\": [\r\n    {\r\n      \"id\": \"deviceUUID\",\r\n      \"type\": \"Device\",\r\n      \"name\": \"deviceName\"\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/devicegroups/devicegrouprecords",
+							"protocol": "https",
+							"host": [
+								"{{fmc}}"
+							],
+							"path": [
+								"api",
+								"fmc_config",
+								"v1",
+								"domain",
+								"{{domain_uuid}}",
+								"devicegroups",
+								"devicegrouprecords"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FMC - Device Groups - Device Group Records",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-auth-access-token",
+								"value": "{{access-token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"zoom3_upd\",\r\n  \"type\": \"DeviceGroup\",\r\n  \"id\": \"deviceGroupUUID\",\r\n  \"members\": [\r\n    {\r\n      \"id\": \"deviceUUID\",\r\n      \"type\": \"Device\",\r\n      \"name\": \"deviceName\"\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/devicegroups/devicegrouprecords",
+							"protocol": "https",
+							"host": [
+								"{{fmc}}"
+							],
+							"path": [
+								"api",
+								"fmc_config",
+								"v1",
+								"domain",
+								"{{domain_uuid}}",
+								"devicegroups",
+								"devicegrouprecords"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FMC - Device Groups - Device Group Records",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-auth-access-token",
+								"value": "{{access-token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"test1\",\r\n  \"type\": \"DeviceGroup\",\r\n  \"id\": \"devicegroupUUID\",\r\n  \"links\": {\r\n    \"self\": \"/fmc_config/v1/domain/domainUUID/devicegroups/devicegrouprecords/devicegroupUUID\"\r\n  },\r\n  \"members\": [\r\n    {\r\n      \"id\": \"deviceUUID\",\r\n      \"type\": \"Device\",\r\n      \"name\": \"deviceName\",\r\n      \"links\": {\r\n        \"self\": \"/api/fmc_config/v1/domain/default/devices/devicerecords/deviceUUID\"\r\n      }\r\n    }\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/devicegroups/devicegrouprecords",
+							"protocol": "https",
+							"host": [
+								"{{fmc}}"
+							],
+							"path": [
+								"api",
+								"fmc_config",
+								"v1",
+								"domain",
+								"{{domain_uuid}}",
+								"devicegroups",
+								"devicegrouprecords"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Device HA Pairs",
+			"description": "",
+			"item": [
+				{
+					"name": "FMC - Device HA Pairs - Device HA Pair Services",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-auth-access-token",
+								"value": "{{access-token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"NetworkGroup\",\n    \"literals\": [\n        {\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.200\"\n        },\n\t\t{\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.201\"\n        },\n        {\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.202\"\n        }\n    ],\n    \"name\": \"UCSD_Internet_Access\",\n    \"id\": \"000C29D6-B20B-0ed3-0000-008589934595\"\n}"
+						},
+						"url": {
+							"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}}/devicehapairs/ftddevicehapairs",
+							"protocol": "https",
+							"host": [
+								"{{fmc}}"
+							],
+							"path": [
+								"api",
+								"fmc_config",
+								"v1",
+								"domain",
+								"{{domain_uuid}}}",
+								"devicehapairs",
+								"ftddevicehapairs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FMC - Device HA Pairs - Device HA Pair Services",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-auth-access-token",
+								"value": "{{access-token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"primary\": {\r\n    \"id\": \"primary_uuid\"\r\n  },\r\n  \"secondary\": {\r\n    \"id\": \"secondary_uuid\"\r\n  },\r\n  \"name\": \"<ha-name>\",\r\n  \"type\": \"DeviceHAPair\",\r\n  \"ftdHABootstrap\": {\r\n    \"isEncryptionEnabled\": \"false\",\r\n    \"encKeyGenerationScheme\": \"CUSTOM\",\r\n    \"sharedKey\": \"cisco123\",\r\n    \"useSameLinkForFailovers\": \"true\",\r\n    \"lanFailover\": {\r\n      \"useIPv6Address\": \"false\",\r\n      \"subnetMask\": \"255.255.255.0\",\r\n      \"interfaceObject\": {\r\n        \"id\": \"<uuid>\",\r\n        \"type\": \"PhysicalInterface\",\r\n        \"name\": \"GigabitEthernet0/0\"\r\n      },\r\n      \"standbyIP\": \"1.1.1.2\",\r\n      \"logicalName\": \"LAN-INTERFACE\",\r\n      \"activeIP\": \"1.1.1.1\"\r\n    },\r\n    \"statefulFailover\": {\r\n      \"useIPv6Address\": \"true\",\r\n      \"subnetMask\": \"255.255.255.0\",\r\n      \"interfaceObject\": {\r\n        \"id\": \"<uuid>\",\r\n        \"type\": \"PhysicalInterface\",\r\n        \"name\": \"GigabitEthernet0/0\"\r\n      },\r\n      \"standbyIP\": \"1.1.1.2\",\r\n      \"logicalName\": \"STATEFUL-INTERFACE\",\r\n      \"activeIP\": \"1.1.1.1\"\r\n    }\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}}/devicehapairs/ftddevicehapairs",
+							"protocol": "https",
+							"host": [
+								"{{fmc}}"
+							],
+							"path": [
+								"api",
+								"fmc_config",
+								"v1",
+								"domain",
+								"{{domain_uuid}}}",
+								"devicehapairs",
+								"ftddevicehapairs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FMC - Device HA Pairs - Device HA Pair Services",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-auth-access-token",
+								"value": "{{access-token}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"ha_container_uuid\",\r\n  \"action\": \"SWITCH\"\r\n}"
+						},
+						"url": {
+							"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}}/devicehapairs/ftddevicehapairs",
+							"protocol": "https",
+							"host": [
+								"{{fmc}}"
+							],
+							"path": [
+								"api",
+								"fmc_config",
+								"v1",
+								"domain",
+								"{{domain_uuid}}}",
+								"devicehapairs",
+								"ftddevicehapairs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FMC - Device HA Pairs - Device HA Pair Services",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-auth-access-token",
+								"value": "{{access-token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"NetworkGroup\",\n    \"literals\": [\n        {\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.200\"\n        },\n\t\t{\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.201\"\n        },\n        {\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.202\"\n        }\n    ],\n    \"name\": \"UCSD_Internet_Access\",\n    \"id\": \"000C29D6-B20B-0ed3-0000-008589934595\"\n}"
+						},
+						"url": {
+							"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}}/devicehapairs/ftddevicehapairs",
+							"protocol": "https",
+							"host": [
+								"{{fmc}}"
+							],
+							"path": [
+								"api",
+								"fmc_config",
+								"v1",
+								"domain",
+								"{{domain_uuid}}}",
+								"devicehapairs",
+								"ftddevicehapairs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "FMC Generate Authentication Token",
 			"event": [
 				{
@@ -144,79 +602,6 @@
 			"response": []
 		},
 		{
-			"name": "FMC - Deployment - Deployable Devices",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "X-auth-access-token",
-						"value": "{{access-token}}"
-					}
-				],
-				"body": {},
-				"url": {
-					"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/deployment/deployabledevices",
-					"protocol": "https",
-					"host": [
-						"{{fmc}}"
-					],
-					"path": [
-						"api",
-						"fmc_config",
-						"v1",
-						"domain",
-						"{{domain_uuid}}",
-						"deployment",
-						"deployabledevices"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "FMC - Deployment - Deployment Requests",
-			"request": {
-				"auth": {
-					"type": "noauth"
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "X-auth-access-token",
-						"value": "{{access-token}}"
-					},
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n  \"type\": \"DeploymentRequest\",\r\n  \"version\": \"1457566762351\",\r\n  \"forceDeploy\": true,\r\n  \"ignoreWarning\": true,\r\n  \"deviceList\": [\r\n    \"d94f7ada-d141-11e5-acf3-c41f7e67fb1b\"\r\n  ]\r\n}"
-				},
-				"url": {
-					"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/deployment/deploymentrequests",
-					"protocol": "https",
-					"host": [
-						"{{fmc}}"
-					],
-					"path": [
-						"api",
-						"fmc_config",
-						"v1",
-						"domain",
-						"{{domain_uuid}}",
-						"deployment",
-						"deploymentrequests"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "FMC - Devices - Device Records",
 			"request": {
 				"auth": {
@@ -234,7 +619,7 @@
 					"raw": "{\n    \"type\": \"NetworkGroup\",\n    \"literals\": [\n        {\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.200\"\n        },\n\t\t{\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.201\"\n        },\n        {\n            \"type\": \"Host\",\n            \"value\": \"10.1.70.202\"\n        }\n    ],\n    \"name\": \"UCSD_Internet_Access\",\n    \"id\": \"000C29D6-B20B-0ed3-0000-008589934595\"\n}"
 				},
 				"url": {
-					"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/deployment/deployabledevices",
+					"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/devices/devicerecords",
 					"protocol": "https",
 					"host": [
 						"{{fmc}}"
@@ -245,8 +630,8 @@
 						"v1",
 						"domain",
 						"{{domain_uuid}}",
-						"deployment",
-						"deployabledevices"
+						"devices",
+						"devicerecords"
 					]
 				}
 			},
@@ -333,6 +718,47 @@
 						"object",
 						"networkgroups",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FMC - Policy - Access Policies",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-auth-access-token",
+						"value": "{{access-token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "https://{{fmc}}/api/fmc_config/v1/domain/{{domain_uuid}}/policy/accesspolicies",
+					"protocol": "https",
+					"host": [
+						"{{fmc}}"
+					],
+					"path": [
+						"api",
+						"fmc_config",
+						"v1",
+						"domain",
+						"{{domain_uuid}}",
+						"policy",
+						"accesspolicies"
 					]
 				}
 			},
